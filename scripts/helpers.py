@@ -9,10 +9,13 @@ def standardize(x, mean_x=None, std_x=None):
     x = x - mean_x
     if std_x is None:
         std_x = np.std(x, axis=0)
-    x[:, std_x>0] = x[:, std_x>0] / std_x[std_x>0]
+    #x = x[:, std_x>0] / std_x[std_x>0]
     
-    tx = np.hstack((np.ones((x.shape[0],1)), x))
-    return tx, mean_x, std_x
+    #remove outliers
+    #for n in range(0,x.shape[0]):
+        
+    
+    return (x-mean_x)/std_x, mean_x, std_x
 
 
 def batch_iter(y, tx, batch_size, num_batches=None, shuffle=True):
