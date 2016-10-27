@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """some helper functions."""
 import numpy as np
+import matplotlib.pyplot as plt
 
 def standardize(x, mean_x=None, std_x=None):
     """Standardize the original data set."""
