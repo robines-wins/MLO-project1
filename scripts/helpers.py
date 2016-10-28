@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+
 """some helper functions."""
 import numpy as np
+
 
 def standardize(x, mean_x=None, std_x=None):
     """Standardize the original data set."""
@@ -9,9 +11,9 @@ def standardize(x, mean_x=None, std_x=None):
     x = x - mean_x
     if std_x is None:
         std_x = np.std(x, axis=0)
-    x[:, std_x>0] = x[:, std_x>0] / std_x[std_x>0]
-    
-    tx = np.hstack((np.ones((x.shape[0],1)), x))
+    x[:, std_x > 0] = x[:, std_x > 0] / std_x[std_x > 0]
+
+    tx = np.hstack((np.ones((x.shape[0], 1)), x))
     return tx, mean_x, std_x
 
 
@@ -26,7 +28,7 @@ def batch_iter(y, tx, batch_size, num_batches=None, shuffle=True):
         <DO-SOMETHING>
     """
     data_size = len(y)
-    num_batches_max = int(np.ceil(data_size/batch_size))
+    num_batches_max = int(np.ceil(data_size / batch_size))
     if num_batches is None:
         num_batches = num_batches_max
     else:
