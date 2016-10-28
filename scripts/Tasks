@@ -1,0 +1,27 @@
+Enlever les outliers (pace)
+
+Rediger le rapport (6 baseline methods, tout les parametres utilisés dans le projet (lambda, folds for cross validation...), les differences de loss entre les differentes configuration)
+
+finir et tester cross-validation (trouver le bon lambda) (pace)
+
+fixer logitic regression (robin)
+
+faire un fichier python avec implementation des fonctions demander (yannick)
+
+documenter le code (yannick)
+
+
+
+
+
+
+Rediger le rapport (
+6 baseline methods, (robin)
+parler de notre implementation (bien l'expliquer) (yannick)
+tout les parametres utilisés dans le projet (lambda, folds for cross validation...), les differences de loss entre les differentes configuration) (pace)
+
+
+Dimanche 21h
+adrian-pace
+wytigo
+
