@@ -14,9 +14,12 @@ def cross_validation(y, tx, gradient_descent, initial_w, max_iters, gamma, grad_
     train_tx,train_y=x_poly[np.ravel(train_indices)],y[np.ravel(train_indices)]
     test_tx,test_y=x_poly[k_indices[k]],y[k_indices[k]]
  
-    partial
+
+    gradf = partial(grad_function,lambda_ = lambda_)
+    costf = partial(cost_function, lambda_ = lambda_)
+    
+    
     loss_tr, weight = gradient_descent(y, tx, initial_w, max_iters, gamma, grad_function, cost_function)
 
-    loss_tr=compute_loss_poly(train_y,train_tx,weight)
-    loss_te=compute_loss_poly(test_y,test_tx,weight)
+    loss_te=compute_loss(test_y,test_tx,weight)
     return loss_tr, loss_te,weight
