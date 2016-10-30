@@ -1,0 +1,93 @@
+\documentclass[10pt,conference,compsocconf]{IEEEtran}
+
+\usepackage{hyperref}
+\usepackage{graphicx}	% For figure environment
+
+
+\begin{document}
+\title{Finding the Higgs boson}
+
+\author{
+  Robin\\
+  \textit{Department of Computer Science, EPFL Lausanne, Switzerland}
+  Adrian Pace\\
+  \textit{Department of Computer Science, EPFL Lausanne, Switzerland}
+  Yannick Schaeffer\\
+  \textit{Department of Computer Science, EPFL Lausanne, Switzerland}
+}
+
+\maketitle
+
+\begin{abstract}
+ The Higgs boson is an elementary particle in the Standard Model of physics which explains why other particles have mass. The Higgs boson decays rapidly into other particles and we observe the resulting signature to determine if it was a Higgs boson or some other particle / process. By using binary classification techniques, we can estimate the likelihood that a given signature was the result of a Higgs boson. This will be helpful to narrow the region where the Higgs is expected to be from the overwhelming number of noise in the dataset.
+\end{abstract}
+
+\section{Introduction}
+
+TODO: Find intro, will probably need to have finished the other sections before.
+
+\section{Models and Methods}
+\subsection{Background}
+\subsubsection{Basic methods}
+\paragraph{general\_stochastic\_gradient\_descent}
+is the same as the same spirit as the function general\_gradient\_descent
+but it perform a stochastic gradient descend loop, this mean only compute correction on part of the sample. all argument are the same as above, with same meaning execept grad\_function is gone and we have two new ones.
+\emph{NOTE : C'EST BIEN DEG LES DESCRIPTIONS, JE DOIS MODIFIER LE TEMPLATE POUR AJOUTER UN NOUVEAU SUBPARAGRAPH.}
+\begin{description}
+\item [{batch\_size}] the size of the subset on which we'll compute the
+``partial gradient'' (the g correction term in the course notes)
+\item [{stock\_grad\_function}] the function who will compute the stochastic
+gradient given a subset of y, a corresponding subset of tx and the
+current weigth vector w.
+\item [{the}] selection of the subset is done inside the function with
+the help of the batch\_iter function from the labs exercises
+\end{description}
+
+
+\paragraph{least\_squares\_GD}
+perform a gradient descent with cost function MSE and gradient function the gradient of the MSE function. this is the definition of least square GD. argument have same meaning as their homonyms described above
+
+\paragraph{least\_squares\_SGD}
+perform a stochastic gradient descent with cost function MSE and gradient function the gradient of the MSE function. this is the definition of least square GD. argument have same meaning as their homonyms described above
+
+\paragraph{least\_squares}
+solve directly the least square problem using linear algebra, we use numpy linear system solve function to solve the system presented in the course this way as a better accuracy and less rounding error than if we directly use the solution formula who need to compute an inverse
+
+\paragraph{ridge regression}
+
+same as the one before expect that we introduce a regularization term in the equation. again we solve the linear system derived in course.
+
+\paragraph{logistic regression}
+
+perform logistic regression which is a gradient descent with special cost function and associate gradient function. that what we do we call general\_gradient\_descent with the new cost and gradient function 
+
+\paragraph{reg logistic regression}
+same as the previous one but with a regularisation term in the cost function. (and so also in gradient function). As general\_gradient\_descent only call the cost and grad function with the argument y,tx and w we need to fix the lambda\_ parameter before passing the cost and gradient function to general\_gradient\_descent. this is done using the partial function of python
+
+\subsubsection{Parameters}
+There are multiple parameters in the project which can be tuned. 
+\paragraph{Gamma} is the parameter describing the step of the gradient descent and of the stochastic gradient descent. At each iteration, the new weight will be calculated by adding to the current weights the derivative of the weights times gamma. It mustn’t be too high or we will go in the direction of the good weights but miss them and go further. And at each iteration, we will further ourselves from the weights. If it is too small, we will eventually reach the best weights, but it will take a lot of time. Thus, we searched iteratively for the smallest gamma for which we got a reasonable computing time.
+Least square GD and Least square SGD : gamma=0.000003.
+Logistic regression and regularized logistic regression : 0.00003
+Max iterations: this parameter describes how many steps will we take before stopping the algorithm. The higher, the more finely tuned the weights will get, and the smaller, the shorter the algorithme will be. 
+Least square GD and Least square SGD : max iterations=1000.
+Logistic regression and regularized logistic regression :  max iterations=800
+\paragraph{Lambda} is the parameter used to avoid overfitting. For this, we did a cross-validation (with 4 folds) and check the test error. We tried it for 30 different lambdas and we saw that there was no lambdas for which the test error was extremely different from the train error. We can then conclude that we don’t have overfitting. This is also because we use linear models. So lambda=0
+ Which function we will use to estimate the weights. We decided to use the least square method. We chose this before the least square GD and SGD since it yielded a better mse (0.3423 against 0.3616). We chose Least square over logistic regression, since when we applied the weights to the input data, classified it, and compared it to the original y, we saw that Least square was more effective than logistic regression (64695 misclassifications against 68921).
+\subsection{Final implementation}
+
+TODO: When finalized describe here the final implementation with the reasoning behind it.
+
+\section{Results}
+TODO: Present our results.
+
+\section{Discussion}
+TODO: Explain our results strength and weaknesses.
+
+\section{Summary}
+TODO: Conclusion on how tis will be helpfull in this research area.
+
+\bibliographystyle{IEEEtran}
+\bibliography{literature}
+
+\end{document}
