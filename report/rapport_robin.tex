@@ -1,0 +1,87 @@
+%% LyX 2.2.0 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[oneside,english]{book}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{luainputenc}
+\setcounter{tocdepth}{3}
+\usepackage{amstext}
+\usepackage{babel}
+\begin{document}
+
+\paragraph{general\_gradient\_descent}
+
+is a function who perform the gradient descent algorithm for \emph{any}
+gradient and loss formula. it's just a loop of a certain length, at
+each iteration we compute the gradient and move a little bit our weight
+vector along this gradient. the argument are:
+\begin{description}
+\item [{y,tx,w}] namely, the output vector, the input feature matrix and
+the inital weight vector from where we'll start the gradient descent
+loop
+\item [{max\_iter}] the number of gradient descent iteration we'll do
+\item [{gamma}] the coefficient by which will add the gradient to our current
+vector $w^{t+1}=w^{t}+\text{gamma}*\nabla L(w^{t})$
+\item [{grad\_function}] the function who will return the gradient at point
+w given (y,tx,w)
+\item [{cost\_function}] the function who will return the cost at w given
+(y,tx,w)
+\end{description}
+
+\paragraph{general\_stochastic\_gradient\_descent}
+
+is the same as the same spirit as the function general\_gradient\_descent
+but it perform a stochastic gradient descend loop, this mean only
+compute correction on part of the sample. all argument are the same
+as above, with same meaning execept grad\_function is gone and we've
+2 new ones
+\begin{description}
+\item [{batch\_size}] the size of the subset on which we'll compute the
+``partial gradient'' (the g correction term in the course notes)
+\item [{stock\_grad\_function}] the function who will compute the stochastic
+gradient given a subset of y, a corresponding subset of tx and the
+current weigth vector w.
+\item [{the}] selection of the subset is done inside the function with
+the help of the batch\_iter function from the labs exercises
+\end{description}
+
+\paragraph{least\_squares\_GD}
+
+perform a gradient descent with cost function MSE and gradient function
+the gradient of the MSE function. this is the definition of least
+square GD. argument have same meaning as their homonyms described
+above
+
+\paragraph{least\_squares\_SGD}
+
+perform a stochastic gradient descent with cost function MSE and gradient
+function the gradient of the MSE function. this is the definition
+of least square GD. argument have same meaning as their homonyms described
+above
+
+\paragraph{least\_squares}
+
+solve directly the least square problem using linear algebra, we use
+numpy linear system solve function to solve the system presented in
+the course this way as a better accuracy and less rounding error than
+if we directly use the solution formula who need to compute an inverse
+
+\paragraph{ridge regression}
+
+same as the one before expect that we introduce a regularization term
+in the equation. again we solve the linear system derived in course.
+
+\paragraph{logistic regression}
+
+perform logistic regression which is a gradient descent with special
+cost function and associate gradient function. that what we do we
+call general\_gradient\_descent with the new cost and gradient function 
+
+\paragraph{reg logistic regression}
+
+same as the previous one but with a regularisation term in the cost
+function. (and so also in gradient function). As general\_gradient\_descent
+only call the cost and grad function with the argument y,tx and w
+we need to fix the lambda\_ parameter before passing the cost and
+gradient function to general\_gradient\_descent. this is done using
+the partial function of python
+\end{document}
