@@ -19,23 +19,23 @@
 \maketitle
 
 \begin{abstract}
- The Higgs boson is an elementary particle in the Standard Model of physics which explains why other particles have mass. The Higgs boson decays rapidly into other particles and we observe the resulting signature to determine if it was a Higgs boson or some other particle / process. By using binary classification techniques, we can estimate the likelihood that a given signature was the result of a Higgs boson. This will be helpful to narrow the region where the Higgs is expected to be from the overwhelming number of noise in the dataset.
+ The Higgs boson is an elementary particle in the Standard Model of physics, which explains why other particles have mass. The Higgs boson decays rapidly into other particles and we observe the resulting signature to determine if it was a Higgs boson or some other particle / process. By using binary classification techniques, we can estimate the likelihood that a given signature was the result of a Higgs boson. This will be helpful to narrow the region where the Higgs is expected to be from the overwhelming number of noise in the dataset.
 \end{abstract}
 
 \section{Introduction}
+We use binary classification techniques to estimate the likelihood that a Higgs boson is in a given snapshot of a particle collision, this data will then be used to distinguish the interesting samples that have a high probability to contain a Higgs boson from the samples where it's very likely to be only background information, mostly in the form of already known processes.
 
-TODO: Find intro, will probably need to have finished the other sections before.
+We have tried various machine learning approaches to obtain the final weights and discuss them in section II.
+
+In section III we compare how effective each approach we tried were, and discuss the methodology we used to determine the best choice of parameters.
+
+We then discuss the strength and weaknesses of our approach and conclude this paper with the implication of our method.
 
 \section{Models and Methods}
 \subsection{Background, Basic methods}
 %\subsubsection{Basic methods}
-
 \subsubsection{general\_gradient\_descent}
-
-is a function who perform the gradient descent algorithm for \emph{any}
-gradient and loss formula. it's just a loop of a certain length, at
-each iteration we compute the gradient and move a little bit our weight
-vector along this gradient. the argument are:
+the general gradient descent is a function who performs the gradient descent algorithm for \emph{any} gradient and loss formula. It's simply a loop of a certain length, at each iteration we compute the gradient and move a little bit our weight vector along this gradient. Its arguments are:
 \paragraph{y,tx,w} namely, the output vector, the input feature matrix and
 the inital weight vector from where we'll start the gradient descent
 loop
