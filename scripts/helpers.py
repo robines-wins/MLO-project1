@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
 """some helper functions."""
-import numpy as np
 import matplotlib.pyplot as plt
-
+import numpy as np
 
 
 def standardize(x, mean_x=None, std_x=None):
@@ -17,6 +16,25 @@ def standardize(x, mean_x=None, std_x=None):
 
     tx = np.hstack((np.ones((x.shape[0], 1)), x))
     return tx, mean_x, std_x
+
+
+def remove_outliers(tx, mean_x, std_x):
+    n_tx = tx.copy()
+    for sample in range(tx.shape[0]):
+        for dim in range(tx.shape[1]):
+            if (n_tx[sample, dim] > mean_x[dim] + 2 * std_x[dim]):
+                n_tx[sample, dim] = mean_x[dim]
+            if (n_tx[sample, dim] < mean_x[dim] - 2 * std_x[dim]):
+                n_tx[sample, dim] = mean_x[dim]
+            if (n_tx[sample, dim] == -999):
+                n_tx[sample, dim] = 0
+    return n_tx
+
+
+def modify_y(y):
+    y2 = y.copy()
+    y2[np.where(y == -1)] = 0
+    return y2
 
 
 def batch_iter(y, tx, batch_size, num_batches=None, shuffle=True):
@@ -49,7 +67,7 @@ def batch_iter(y, tx, batch_size, num_batches=None, shuffle=True):
         if start_index != end_index:
             yield shuffled_y[start_index:end_index], shuffled_tx[start_index:end_index]
 
-            
+
 def cross_validation_visualization(lambds, mse_tr, mse_te):
     """visualization the curves of mse_tr and mse_te."""
     plt.semilogx(lambds, mse_tr, marker=".", color='b', label='train error')

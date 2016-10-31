@@ -4,7 +4,7 @@
    and search for optimal parameters or function to use"""
 from functools import partial
 
-import numpy as np
+from costs import *
 
 
 def build_k_indices(y, k_fold, seed):
