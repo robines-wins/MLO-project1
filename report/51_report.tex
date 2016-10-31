@@ -23,7 +23,7 @@
 \end{abstract}
 
 \section{Introduction}
-We use binary classification techniques to estimate the likelihood that a Higgs boson is in a given snapshot of a particle collision, this data will then be used to distinguish the interesting samples that have a high probability to contain a Higgs boson from the samples where it's very likely to be only background information, mostly in the form of already known processes.
+We use binary classification techniques to estimate the likelihood that a Higgs boson is in a given snapshot of a particle collision, this data will then be used to distinguish the interesting samples that have a high probability to contain a Higgs boson from the samples where it is very likely to be only background information, mostly in the form of already known processes.
 
 We have tried various machine learning approaches to obtain the final weights and discuss them in section II.
 
@@ -35,24 +35,24 @@ We then discuss the strength and weaknesses of our approach and conclude this pa
 \subsection{Background, Basic methods}
 %\subsubsection{Basic methods}
 \subsubsection{general\_gradient\_descent}
-The general gradient descent is a function who performs the gradient descent algorithm for \emph{any} gradient and loss formula. It's simply a loop of a certain length, at each iteration we compute the gradient and move a little bit our weight vector along this gradient. Its arguments are:
-\paragraph{y,tx,w} namely, the output vector, the input feature matrix and the initial weight vector from where we'll start the gradient descent loop.
-\paragraph{max\_iter} the number of gradient descent iteration we'll do.
+The general gradient descent is a function which performs the gradient descent algorithm for \emph{any} gradient and loss formula. It is simply a loop of a certain length, at each iteration we compute the gradient and move a little bit our weight vector along this gradient. Its arguments are:
+\paragraph{y,tx,w} namely, the output vector, the input feature matrix and the initial weight vector from where we will start the gradient descent loop.
+\paragraph{max\_iter} the number of gradient descent iteration we will do.
 \paragraph{gamma} the coefficient by which will add the gradient to our current vector \(w^{t+1}=w^{t}+gamma*\nabla L(w^{t})\).
 \paragraph{grad\_function} the function that will return the gradient at point w given (y,tx,w).
 \paragraph{cost\_function} the function that will return the cost at w given (y,tx,w).
 
 
 \subsubsection{general\_stochastic\_gradient\_descent}
-The general stochastic gradient descent is written in the same spirit as the general gradient descent function with the main difference being it performs a stochastic gradient descend loop, this mean it only compute correction on a part of the sample. The selection of the subset is done inside the function with the help of the batch\_iter function from the labs exercises. All arguments are the same as above, with same meaning except grad\_function is replaced by stock\_grad\_function which serve the same purpose, and there is a new batch\_size argument.
-\paragraph{batch\_size} the size of the subset on which we'll compute the ``partial gradient'' (the g correction term in the course notes).
+The general stochastic gradient descent is written in the same spirit as the general gradient descent function with the main difference being it performs a stochastic gradient descend loop, this means it only compute correction on a part of the sample. The selection of the subset is done inside the function with the help of the batch\_iter function from the labs exercises. All arguments are the same as above, with same meaning except grad\_function is replaced by stock\_grad\_function which serve the same purpose, and there is a new batch\_size argument.
+\paragraph{batch\_size} the size of the subset on which we will compute the ``partial gradient'' (the g correction term in the course notes).
 \paragraph{stock\_grad\_function} the function who will compute the stochastic gradient given a subset of y, a corresponding subset of tx and the current weigth vector w.
 
 \subsubsection{least\_squares\_GD}
-Performs a general gradient descent with cost function compute\_cost\_MSE (Mean Squared Error) and gradient function compute_gradient_MSE, the gradient of the MSE function. Arguments have the same meaning as their homonyms described above.
+Performs a general gradient descent with cost function compute\_cost\_MSE (Mean Squared Error) and gradient function compute\_gradient\_MSE, the gradient of the MSE function. Arguments have the same meaning as their homonyms described above.
 
 \subsubsection{least\_squares\_SGD}
-Performs a general stochastic gradient descent with cost function compute\_cost\_MSE (Mean Squared Error) and gradient function compute_gradient_MSE, the gradient of the MSE function. Arguments have the same meaning as their homonyms described above.
+Performs a general stochastic gradient descent with cost function compute\_cost\_MSE (Mean Squared Error) and gradient function compute\_gradient\_MSE, the gradient of the MSE function. Arguments have the same meaning as their homonyms described above.
 
 \subsubsection{least\_squares}
 Solves directly the least square problem using linear algebra. We use, in our implementation the numpy linear system solve function to get the solution of the system presented in the course. This method provides a better accuracy and less rounding error than if we used directly the inverse formula.
@@ -61,23 +61,23 @@ Solves directly the least square problem using linear algebra. We use, in our im
 We use a similar approach to the least\_squares explained above, but we introduce a regularization term in the equation controlled by the lambda\_ parameter. This adds an artificial cost proportional to the weights. Finally we solve the linear system derived in the course.
 
 \subsubsection{logistic\_regression}
-Performs logistic regression which is a gradient descent method with special cost function and associated gradient function. It is implemented by calling the general\_gradient\_descent with the new cost and gradient function 
+Performs logistic regression which is a gradient descent method with special cost function and associated gradient function. It is implemented by calling the general\_gradient\_descent with the new cost and gradient function.
 
 \subsubsection{reg logistic regression}
-In a similar way as the logistic regression but with a regularization term in both the cost function and gradient function called lamdba\_. As general\_gradient\_descent only call the cost and grad function with the argument y,tx and w we need to fix the lambda\_ parameter before passing the cost and gradient function to general\_gradient\_descent. this is done using the partial function of python
+In a similar way as the logistic regression but with a regularization term in both the cost function and gradient function called lamdba\_. As general\_gradient\_descent only call the cost and grad function with the argument y,tx and w we need to fix the lambda\_ parameter before passing the cost and gradient function to general\_gradient\_descent. This is done using the partial function of python.
 
 \subsection{Parameters}
 There are multiple parameters in the project which can be tuned. 
-\paragraph{Gamma} is the parameter describing the step of the gradient descent and of the stochastic gradient descent. At each iteration, the new weight will be calculated by adding to the current weights the derivative of the weights times gamma. It mustn’t be too high or we will go in the direction of the good weights but miss them and go further. And at each iteration, we will further ourselves from the weights. If it is too small, we will eventually reach the best weights, but it will take a lot of time. Thus, we searched iteratively for the smallest gamma for which we got a reasonable computing time.
+\paragraph{Gamma} is the parameter describing the step of the gradient descent and of the stochastic gradient descent. At each iteration, the new weights will be calculated by adding to the current weights the derivative of the weights times gamma. It mustn’t be too high or we will go in the direction of the good weights but miss them and go further. And at each iteration, we will further ourselves from the weights. If it is too small, we will eventually reach the best weights, but it will take a lot of time. Thus, we searched iteratively for the smallest gamma for which we got a reasonable computing time.
 Least square GD and Least square SGD : gamma=0.000003.
 Logistic regression and regularized logistic regression : gamma=0.00003
 \paragraph{Max iterations} this parameter describes how many steps will we take before stopping the algorithm. The higher, the more finely tuned the weights will get, and the smaller, the shorter the algorithme will be. 
 Least square GD and Least square SGD : max iterations=1000.
 Logistic regression and regularized logistic regression :  max iterations=1000
-\paragraph{Lambda} is the parameter used to avoid overfitting. For this, we did a cross-validation (with 4 folds) and check the test error. We tried it for 30 different lambdas and we saw that there was no lambdas for which the test error was extremely different from the train error. We can then conclude that we don’t have overfitting. This is also because we use linear models. So lambda=0
+\paragraph{Lambda} is the regularization parameter used to avoid overfitting. To find this parameter, we did a cross-validation (with 4 folds) and checked the test error. We tried it for 30 different lambdas and we saw that there was no lambdas for which the test error was extremely different from the train error. We can then conclude that we don’t have overfitting. This is also because we use linear models. So lambda=0.
 \paragraph{Which function we will use to estimate the weights} We decided to use the least square method. We chose this before the least square GD and SGD since it yielded a better mse (0.3423 against 0.3616). We chose Least square over logistic regression, since when we applied the weights to the input data, classified it, and compared it to the original y, we saw that Least square was more effective than logistic regression (64695 misclassifications against 68921).
-\paragraph{tX itself} we've tried different preproceesing on the feature before performing machine learning on them. We tried to normalize outliers (feature outside of its 95\%  interval for each feature. TO COMPLETE\\
-we also tried to rescale the data. This mean that all feature will be in mapped \( [0,1] \) but with conservation of the relative distance between them. for each feature set we took the max an min and define new value x' from old value x by = \( x' = \frac{x-\min}{\max - \min }\). this is know to improve convergence and efficacy of gradient descend algorithm. But even with this the direct least square computation was still the better way.
+\paragraph{tX itself} we've tried different preproceesing on the feature before performing machine learning on them. We tried to normalize outliers (normalizing the features of each sample when they were outside of the 95\% trust interval of the particular feature). Also we saw that a few features were at -999 so we concluded they were also outliers and we normalized them.
+We also tried to rescale the data. This mean that all feature will be  mapped to \( [0,1] \) but with conservation of the relative distance between them. For each feature set we took the max an min and defined the new value x' from old value x by = \( x' = \frac{x-\min}{\max - \min }\). This is known to improve convergence and efficacy of gradient descend algorithm. But even with this, the direct least square computation was still the better way.
 \subsection{Final implementation}
 
 TODO: When finalized describe here the final implementation with the reasoning behind it.
