@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 """some helper functions."""
-import matplotlib.pyplot as plt
 import numpy as np
 
 
@@ -19,6 +18,8 @@ def standardize(x, mean_x=None, std_x=None):
 
 
 def remove_outliers(tx, mean_x, std_x):
+    """"Remove the outliers from the initial dataset by setting the value of each feature to it's mean if it is not
+    within 2 standard deviation of the mean. In other words we only keep the values within a 95% confidence interval"""
     n_tx = tx.copy()
     for sample in range(tx.shape[0]):
         for dim in range(tx.shape[1]):
@@ -31,7 +32,16 @@ def remove_outliers(tx, mean_x, std_x):
     return n_tx
 
 
-def modify_y(y):
+def rescale(tx):
+    """Rescale the input data to values between 0 and 1"""
+    mins = np.amin(tx, axis=0)
+    maxs = np.amax(tx, axis=0)
+    txscale = (tx - mins) / (maxs - mins)
+    return txscale
+
+
+def format_y(y):
+    """Reformat the y vector to binary format (0 or 1)"""
     y2 = y.copy()
     y2[np.where(y == -1)] = 0
     return y2
@@ -66,15 +76,3 @@ def batch_iter(y, tx, batch_size, num_batches=None, shuffle=True):
         end_index = min((batch_num + 1) * batch_size, data_size)
         if start_index != end_index:
             yield shuffled_y[start_index:end_index], shuffled_tx[start_index:end_index]
-
-
-def cross_validation_visualization(lambds, mse_tr, mse_te):
-    """visualization the curves of mse_tr and mse_te."""
-    plt.semilogx(lambds, mse_tr, marker=".", color='b', label='train error')
-    plt.semilogx(lambds, mse_te, marker=".", color='r', label='test error')
-    plt.xlabel("lambda")
-    plt.ylabel("rmse")
-    plt.title("cross validation")
-    plt.legend(loc=2)
-    plt.grid(True)
-    plt.savefig("cross_validation")
