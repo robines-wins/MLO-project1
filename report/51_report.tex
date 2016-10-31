@@ -94,12 +94,14 @@ We also tried to rescale the data. This mean that all feature will be  mapped to
 With the weights obtained by our final implementation we get a success rate of $74.463\%$ on the Kaggle dataset.
 
 \section{Discussion}
+Interestingly, we obtained a better estimation by computing the weights on a unnormalized data set and without removing the ouliers. This might be a coincidence since the difference was minimal, but this also might mean that we are a little too narrow on our trust interval and that we accidently removed relevant data.
+
 Our result of $74.463\%$ may seems like a low success rate, but it has the great competitive advantage to be able to be computed very quickly since it only uses basic least square approach, thus we could easily use a far bigger training set to compute more precise weights.
 
 On the other hand, our approach failed to try adding non linear features to our dataset, and we may have missing something interesting by limiting ourselves to a linear problem.
 
 \section{Summary}
-This algorithm can be used to quickly and efficiently select a region where the Higgs boson is likely to be, and then some more expensive techniques can be implemented to look only at the region we have selected, while ignoring most of the noise.
+This algorithm can be used to quickly and efficiently select a region where the Higgs boson is likely to be, and then some more expensive techniques can be implemented to look only at the region we have selected, while ignoring most of the noise. Future implementations could focus on building a computationally-heavy polynomial model arround the existing weights this implementation yielded. 
 
 \bibliographystyle{IEEEtran}
 \bibliography{literature}
