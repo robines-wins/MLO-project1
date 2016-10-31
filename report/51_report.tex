@@ -19,7 +19,7 @@
 \maketitle
 
 \begin{abstract}
- The Higgs boson is an elementary particle in the Standard Model of physics, which explains why other particles have mass. The Higgs boson decays rapidly into other particles and we observe the resulting signature to determine if it was a Higgs boson or some other particle / process. By using binary classification techniques, we can estimate the likelihood that a given signature was the result of a Higgs boson. This will be helpful to narrow the region where the Higgs is expected to be from the overwhelming number of noise in the dataset.
+The Higgs boson is an elementary particle in the Standard Model of physics, which explains why other particles have mass. The Higgs boson decays rapidly into other particles and we observe the resulting signature to determine if it was a Higgs boson or some other particle / process. By using binary classification techniques, we can estimate the likelihood that a given signature was the result of a Higgs boson. This will be helpful to narrow the region where the Higgs is expected to be from the overwhelming number of noise in the dataset.
 \end{abstract}
 
 \section{Introduction}
@@ -87,21 +87,21 @@ There are multiple parameters in the project which can be tuned.
   \label{fig1}
 \end{figure}
 \section{Final implementation}
-\subsection{Data preprocessing} We have tried different preprocessing on the feature before performing machine learning on them. We tried to normalize outliers (normalizing the features of each sample when they were outside of the 95\% confidence interval of the particular feature). Also we saw that a few features were at -999 so we concluded they were also outliers and we normalized them.
+\subsection{Data preprocessing} We have tried different preprocessing on the feature before performing machine learning on them. We tried to normalize outliers (normalizing the features of each sample when they were outside of the 95\% confidence interval of the particular feature). Furthermore we saw that a few features were at -999 so we concluded they were also outliers and we normalized them.
 We also tried to rescale the data. This mean that all feature will be  mapped to \( [0,1] \) but with conservation of the relative distance between them. For each feature set we took the maximum and minimum and defined the new value x' from old value x by x' with $x' = \frac{x-\min}{\max - \min }$. This is known to improve convergence and efficacy of gradient descend algorithm, but even with this, the direct least square computation was still the most accurate function.
 \subsection{Choosing the weight function} We decided to use the least square method. We chose this before the least square GD and SGD since it yielded a better mean squared error (MSE) (0.1542 and 0.1713 against 0.0852). We chose Least square over logistic regression, since when we applied the weights to the input data, classified it, and compared it to the original y, we saw that Least square was more effective than logistic regression (64695 misclassifications against 68921).
 \section{Results}
-With the weights obtained by our final implementation we get a success rate of $74.463\%$ on the Kaggle dataset.
+With the weights obtained by our final implementation we get a success rate of $74.463\%$ on the Kaggle data set.
 
 \section{Discussion}
-Interestingly, we obtained a better estimation by computing the weights on a unnormalized data set and without removing the ouliers. This might be a coincidence since the difference was minimal, but this also might mean that we are a little too narrow on our trust interval and that we accidently removed relevant data.
+Interestingly, we obtained a better estimation by computing the weights on an unnormalized data set and without removing the outliers. This might be a coincidence since the difference was minimal, but this also might mean that we are a little too narrow on our trust interval and that we accidentally removed relevant data.
 
 Our result of $74.463\%$ may seems like a low success rate, but it has the great competitive advantage to be able to be computed very quickly since it only uses basic least square approach, thus we could easily use a far bigger training set to compute more precise weights.
 
-On the other hand, our approach failed to try adding non linear features to our dataset, and we may have missing something interesting by limiting ourselves to a linear problem.
+On the other hand, our approach failed to try adding non linear features to our data set, and we may have missing something interesting by limiting ourselves to a linear problem.
 
 \section{Summary}
-This algorithm can be used to quickly and efficiently select a region where the Higgs boson is likely to be, and then some more expensive techniques can be implemented to look only at the region we have selected, while ignoring most of the noise. Future implementations could focus on building a computationally-heavy polynomial model arround the existing weights this implementation yielded. 
+This algorithm can be used to quickly and efficiently select a region where the Higgs boson is likely to be, and then some more expensive techniques can be implemented to look only at the region we have selected, while ignoring most of the noise. Future implementations could focus on building a computationally-heavy polynomial model around the existing weights this implementation yielded.
 
 \bibliographystyle{IEEEtran}
 \bibliography{literature}
