@@ -68,7 +68,7 @@ In a similar way as the logistic regression but with a regularization term in bo
 
 \subsection{Parameters}
 There are multiple parameters in the project which can be tuned. 
-\paragraph{Gamma} is the parameter describing the step of the gradient descent and of the stochastic gradient descent. At each iteration, the new weights will be calculated by adding to the current weights the derivative of the weights times gamma. It mustn’t be too high or we will go in the direction of the good weights but miss them and go further. And at each iteration, we will further ourselves from the weights. If it is too small, we will eventually reach the best weights, but it will take a lot of time. Thus, we searched iteratively for the smallest gamma for which we got a reasonable computing time.
+\paragraph{Gamma} is the parameter describing the step of the gradient descent and of the stochastic gradient descent. At each iteration, the new weights will be calculated by adding to the current weights the derivative of the weights times gamma. It must not be too high or we will go in the direction of the good weights but miss them and go further. And at each iteration, we will further ourselves from the weights. If it is too small, we will eventually reach the best weights, but it will take a lot of time. Thus, we searched iteratively for the smallest gamma for which we got a reasonable computing time.
 Least square GD and Least square SGD : gamma=0.000003.
 Logistic regression and regularized logistic regression : gamma=0.00003
 \paragraph{Max iterations} this parameter describes how many steps will we take before stopping the algorithm. The higher, the more finely tuned the weights will get, and the smaller, the shorter the algorithme will be. 
