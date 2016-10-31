@@ -72,14 +72,14 @@ solves directly the least square problem using linear algebra, we use numpy line
 
 \subsubsection{ridge regression}
 
-same as the one before except that we introduce a regularization term in the equation. Again, we solve the linear system derived in course.
+same as the one before except that we introduce a regularization term in the equation, lambda\_. This adds a artificial cost proportional to the weights. Again, we solve the linear system derived in course.
 
 \subsubsection{logistic regression}
 
 performs logistic regression which is a gradient descent with special cost function and associate gradient function. We call general\_gradient\_descent with the new cost and gradient function.
 
 \subsubsection{reg logistic regression}
-same as the previous one but with a regularization term in the cost function. (and so also in gradient function). As general\_gradient\_descent only call the cost and grad function with the argument y,tx and w we need to fix the lambda\_ parameter before passing the cost and gradient function to general\_gradient\_descent. This is done using the partial function of python.
+same as the previous one but with a regularization term in the cost function, lambda\_ (and so also in gradient function). As general\_gradient\_descent only call the cost and grad function with the argument y,tx and w we need to fix the lambda\_ parameter before passing the cost and gradient function to general\_gradient\_descent. This is done using the partial function of python.
 
 \subsection{Parameters}
 There are multiple parameters in the project which can be tuned. 
@@ -89,7 +89,7 @@ Logistic regression and regularized logistic regression : gamma=0.00003
 \paragraph{Max iterations} this parameter describes how many steps will we take before stopping the algorithm. The higher, the more finely tuned the weights will get, and the smaller, the shorter the algorithme will be. 
 Least square GD and Least square SGD : max iterations=1000.
 Logistic regression and regularized logistic regression :  max iterations=1000
-\paragraph{Lambda} is the parameter used to avoid overfitting. For this, we did a cross-validation (with 4 folds) and checked the test error. We tried it for 30 different lambdas and we saw that there was no lambdas for which the test error was extremely different from the train error. We can then conclude that we don’t have overfitting. This is also because we use linear models. So lambda=0.
+\paragraph{Lambda} is the regularization parameter used to avoid overfitting. To find this parameter, we did a cross-validation (with 4 folds) and checked the test error. We tried it for 30 different lambdas and we saw that there was no lambdas for which the test error was extremely different from the train error. We can then conclude that we don’t have overfitting. This is also because we use linear models. So lambda=0.
 \paragraph{Which function we will use to estimate the weights} We decided to use the least square method. We chose this before the least square GD and SGD since it yielded a better mse (0.3423 against 0.3616). We chose Least square over logistic regression, since when we applied the weights to the input data, classified it, and compared it to the original y, we saw that Least square was more effective than logistic regression (64695 misclassifications against 68921).
 \paragraph{tX itself} we've tried different preproceesing on the feature before performing machine learning on them. We tried to normalize outliers (normalizing the features of each sample when they were outside of the 95\% trust interval of the particular feature). Also we saw that a few features were at -999 so we concluded they were also outliers and we normalized them.
 We also tried to rescale the data. This mean that all feature will be  mapped to \( [0,1] \) but with conservation of the relative distance between them. For each feature set we took the max an min and defined the new value x' from old value x by = \( x' = \frac{x-\min}{\max - \min }\). This is known to improve convergence and efficacy of gradient descend algorithm. But even with this, the direct least square computation was still the better way.
