@@ -78,7 +78,7 @@ There are multiple parameters in the project which can be tuned.
 \item Least square GD and Least square SGD : max iterations=1000.
 \item Logistic regression and regularized logistic regression :  max iterations=1000
 \end{itemize}
-\paragraph{Lambda} is the regularization parameter used to avoid over fitting. To find this parameter, we did a cross-validation (with 4 folds) and checked the test error. We tried it for 60 different lambdas between $10^{-5}$ and $10^{-2}$  \ref{fig1} for the ridge regression and between $10^{-6}$ to $10^6$ for the logistic regression \ref{fig2}. We saw that there was no lambdas for which the test error was extremely different from the train error. We can then conclude that we don’t have over fitting. This is also because we use linear models. So lambda=0.
+\paragraph{Lambda} is the regularization parameter used to avoid over fitting. To find this parameter, we did a cross-validation (with 4 folds) and checked the test error. We tried it for 60 different lambdas between $10^{-5}$ and $10^{-2}$  \ref{fig1} for the ridge regression and between $10^{-6}$ to $10^6$ for the logistic regression. We saw that there was no lambdas for which the test error was extremely different from the train error. We can then conclude that we don’t have over fitting. This is also because we use linear models. So lambda=0.
 \begin{figure}[tbp]
   \centering
   \includegraphics[width=\columnwidth]{Lambda values for ridge regression}
@@ -86,26 +86,20 @@ There are multiple parameters in the project which can be tuned.
   \vspace{-3mm}
   \label{fig1}
 \end{figure}
-\begin{figure}[tbp]
-  \centering
-  \includegraphics[width=\columnwidth]{Lambda values for penalized logistic regression}
-  \caption{Lambda effect on cleaned and normalized values for logistic regression}
-  \vspace{-3mm}
-  \label{fig2}
-\end{figure}
 \section{Final implementation}
 \subsection{Data preprocessing} We have tried different preprocessing on the feature before performing machine learning on them. We tried to normalize outliers (normalizing the features of each sample when they were outside of the 95\% confidence interval of the particular feature). Also we saw that a few features were at -999 so we concluded they were also outliers and we normalized them.
 We also tried to rescale the data. This mean that all feature will be  mapped to \( [0,1] \) but with conservation of the relative distance between them. For each feature set we took the maximum and minimum and defined the new value x' from old value x by x' with $x' = \frac{x-\min}{\max - \min }$. This is known to improve convergence and efficacy of gradient descend algorithm, but even with this, the direct least square computation was still the better way.
 \subsection{Choosing the weight function} We decided to use the least square method. We chose this before the least square GD and SGD since it yielded a better mean squared error (MSE) (0.3423 against 0.3616). We chose Least square over logistic regression, since when we applied the weights to the input data, classified it, and compared it to the original y, we saw that Least square was more effective than logistic regression (64695 misclassifications against 68921).
 \section{Results}
-With our final implementation we get a sucess rate... TO BE CONTINUED
+With the weights obtained by our final implementation we get a success rate of $74.463\%$ on the Kaggle dataset.
 
 \section{Discussion}
-TODO: Explain our results strength and weaknesses.
-eg: did not consider ridge with a polynom
+Our result of $74.463\%$ may seems like a low success rate, but it has the great competitive advantage to be able to be computed very quickly since it only uses basic least square approach, thus we could easily use a far bigger training set to compute more precise weights.
+
+On the other hand, our approach failed to try adding non linear features to our dataset, and we may have missing something interesting by limiting ourselves to a linear problem.
 
 \section{Summary}
-TODO: Conclusion on how tis will be helpfull in this research area.
+This algorithm can be used to quickly and efficiently select a region where the Higgs boson is likely to be, and then some more expensive techniques can be implemented to look only at the region we have selected, while ignoring most of the noise.
 
 \bibliographystyle{IEEEtran}
 \bibliography{literature}
