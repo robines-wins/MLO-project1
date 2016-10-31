@@ -14,7 +14,8 @@ run.py is the program that yielded us our submission.
 project1.ipynb is the python notebook where we tested all our implementation and where we searched for the good parameters.
 It is dependent of :
 
+-costs.py (which contains some costs functions)
 -cross_validation.py (which contains the functions related to the cross validation of our work)
 -helpers.py (which contains a few helping  functions from the labs and a few normalizing functions)
+-proj1_helpers.py (which contains the functions importing and exporting the data)
 -implementations.py (which contains our implementations)
--proj1_helpers (which contains the functions importing and exporting the data)
