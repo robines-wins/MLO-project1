@@ -1,4 +1,4 @@
-Enlever les outliers (pace)
+﻿Enlever les outliers (pace)
 
 Rediger le rapport (6 baseline methods, tout les parametres utilisés dans le projet (lambda, folds for cross validation...), les differences de loss entre les differentes configuration)
 
@@ -25,3 +25,17 @@ Dimanche 21h
 adrian-pace
 wytigo
 robines-wins
+
+
+Pace
+Leastsquare normalisé
+plus d'itérations logistic
+
+Robin
+rescale
+Discussion dans le rapport
+
+Yannick
+Intro/conclusion
+Results
+Format du latex ?
