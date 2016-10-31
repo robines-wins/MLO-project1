@@ -78,7 +78,7 @@ There are multiple parameters in the project which can be tuned.
 \item Least square GD and Least square SGD : max iterations=1000.
 \item Logistic regression and regularized logistic regression :  max iterations=1000
 \end{itemize}
-\paragraph{Lambda} is the regularization parameter used to avoid over fitting. To find this parameter, we did a cross-validation (with 4 folds) and checked the test error. We tried it for 60 different lambdas between $10^{-5}$ and $10^{-2}$  \ref{fig1} for the ridge regression and between $10^{-6}$ to $10^6$ for the logistic regression. We saw that there was no lambdas for which the test error was extremely different from the train error. We can then conclude that we don’t have over fitting. This is also because we use linear models. So lambda=0.
+\paragraph{Lambda} is the regularization parameter used to avoid over fitting. To find this parameter, we did a cross-validation (with 4 folds) and checked the test error. We tried it for 60 different lambdas between $10^{-5}$ and $10^{-2}$  see figure \ref{fig1} for the ridge regression and between $10^{-6}$ to $10^6$ for the logistic regression. We saw that there was no lambdas for which the test error was extremely different from the train error. We can then conclude that we don’t have over fitting. This is also because we use linear models. So lambda=0.
 \begin{figure}[tbp]
   \centering
   \includegraphics[width=\columnwidth]{Lambda values for ridge regression}
